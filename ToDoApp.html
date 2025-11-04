@@ -344,12 +344,12 @@ function createTodoItem(todo, todoIndex) {
         editTodoItem(index);
     }, true);
 
-	const assignButton = todoLI.querySelector(".assign-button");
-    editButton.addEventListener("click", (e) => {
+	const assignButton = todoLI.querySelector(".assign-button")
+    assignButton.addEventListener("click", (e) => {
 		e.preventDefault;
 		e.stopPropagation;
 		console.log(e.target.closest("button"));
-		let index = parseInt(e.target.closest("button").getAttribute("id").substr(10));
+		let index = parseInt(e.target.closest("button").getAttribute("id").substr(12));
 		console.log(`Index: ${index}`);
         assignToTeamMember(index);
     }, true);
@@ -425,7 +425,7 @@ function addTeamMember() {
 }
 
 function assignToTeamMember(todoIndex) {
-	alert("Item ${todoIndex} selected. Info: assignToTeamMember() function not implemented yet.");
+	alert(`Item ${todoIndex} selected. Info: assignToTeamMember() function not implemented yet.`);
 }
 
 function saveTeam() {
