@@ -63,17 +63,33 @@ h1 {
     gap: 10px;
 }
 
+.wrapper > form {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
 #todo-input {
     box-sizing: border-box;
-    padding: 12px 20px;
+    padding: 20px;
+    height: 4rem;
     width: 100%;
     background:none;
     border: 2px solid var(--secondary-color);
-    border-radius: 1000px;
+    border-radius: 15px;
     font: inherit;
     color: var(--text-color);
     caret-color: var(--accent-color);
-	rows: 3;
+	cols: 300;
+    resize: none;
+    wrap: hard;
+
+    scrollbar-arrow-color: var(--accent-color);
+    scrollbar-base-color: var(--primary-color);
+    scrollbar-darkshadow-color: var(--weidler-blau);
+    scrollbar-highlight-color: var(--accent-color);
+    scrollbar-shadow-color: var(--weidler-blau);
+
 }
 
 #todo-input:focus {
@@ -85,15 +101,17 @@ form {
 }
 
 #add-button {
+    /*
     position: absolute;
     top: 0;
     right: 0;
+    */
 
     background-color: var(--accent-color);
-    height: 100%;
+    height: 4rem;
     padding: 0 30px;
     border: none;
-    border-radius: 1000px;
+    border-radius: 15px;
     font: inherit;
     font-weight: 600;
     color: var(--background);
@@ -115,6 +133,10 @@ form {
     padding-right: 0;
     flex-grow: 1;
     transition: 200ms ease;
+    width: 100%;
+    overflow: auto;
+    word-wrap: break-word;
+    line-break: normal;
 }
 
 .delete-button {
@@ -227,7 +249,7 @@ input[type="checkbox"] {
     <h1>To Do App</h1>
     <div class="wrapper">
         <form>
-            <input type="textarea" rows="3" placeholder="Neue Aufgabe hier eingeben" id="todo-input" autocomplete="off">
+            <textarea rows="auto" id="todo-input" autocomplete="off" resize="none" placeholder="Neue Aufgabe hier eingeben"></textarea>
             <button id="add-button">add</button>
         </form>
         <ul id="todo-list">
