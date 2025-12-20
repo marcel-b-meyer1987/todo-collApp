@@ -23,6 +23,8 @@
     --accent-color: rgb(247,148,29);
     --text-color: rgb(255,255,255);
 
+	--h1-size: 3rem; 
+
 }
 
 *{
@@ -38,21 +40,61 @@ html {
 
 body {
     min-height: 100vh;
-    padding: 10px;
     background-color: var(--background);
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+nav {
+	padding: 5px 10px 5px 10px;
+	position: fixed;
+	height: var(--h1-size);
+	top: 0px;
+	left: 0px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: start;
+	background-color: var(--background);
+	z-index: 1;
+}
+
+nav > ul {
+	width: 100vw;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 10px;
+}
+
+nav > ul > li {
+	list-style-type: none;
+	color: var(--accent-color);
+	font-weight: 600;
+	transition: transform 150ms ease-in-out;
+	cursor: pointer;
+}
+
+nav > ul > li:hover {
+	list-style-type: none;
+	color: var(--accent-color);
+	font-weight: 600;
+	transform: translateY(5px);
+	/* box-shadow: 0px 5px 5px 0px var(--weidler-blau); */
+}
+
 h1 {
-    margin-top: 100px;
-    margin-bottom: 20px;
-    font-size: 3rem;
+	position: fixed;
+    margin-top: -5px;
+    /* margin-bottom: 20px; */
+    font-size: var(--h1-size);
     font-weight: 800;
     text-transform: uppercase;
     text-align: center;
     color: var(--accent-color);
+	background-color: var(--background);
+	z-index: 1;
 }
 
 .modal {	
@@ -63,6 +105,7 @@ h1 {
 	padding: 16px;
 	border: 3px solid var(--weidler-blau);
 	border-radius: 15px;
+	outline: none;
 	
 }
 
@@ -86,6 +129,7 @@ dialog::backdrop {
     background-color: var(--primary-color);
     border-radius: 15px;
     display: flex;
+	justify-content: space-between;
     align-items: center;
 	cursor: pointer;
 }
@@ -93,6 +137,11 @@ dialog::backdrop {
 .modal li:hover {
 	color: var(--accent-color);
 	font-weight: 600;
+}
+
+.modal li svg:focus {
+	outline: none;
+	border: none;
 }
 
 .modal h3 {
@@ -113,11 +162,18 @@ dialog::backdrop {
     color: var(--background);
     cursor: pointer;
     text-transform: uppercase;
+	transition: transform 150ms ease-in-out;
 }
 
-.modal-button:focus {
+.modal-button:focus, .modal-button:hover {
 	outline: none;
 	color: white;
+}
+
+.modal-button:active {
+	outline: none;
+	color: white;
+	transform: translateY(5px);
 }
 
 .modal form {
@@ -160,6 +216,7 @@ dialog::backdrop {
 
 .modal form input[type="text"]:focus {
 	outline: none;
+	line-height: 1.2rem;
 }
 
 .modal form > li {
@@ -167,7 +224,15 @@ dialog::backdrop {
 	justify-content: space-between;
 }
 
+.modal #button-wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 10px;
+}
+
 .wrapper {
+	margin-top: calc(var(--h1-size) + 1rem);
     width: 700px;
     max-width: 100%;
     display: flex;
@@ -177,7 +242,7 @@ dialog::backdrop {
 
 
 form {
-    position: relative;
+    position: sticky;
 	display: flex;
 	justify-content: space-between;
 	align-items: stretch;
@@ -252,6 +317,14 @@ form {
     cursor: pointer;
 }
 
+.delete-button:focus {
+    outline: none;
+}
+
+.delete-button:focus svg {
+	fill: var(--accent-color);
+}
+
 .delete-button svg {
     transition: 200ms ease;
 }
@@ -298,7 +371,7 @@ form {
 #add-button:focus, #add-member-button:focus {
 	outline: none;
 	color: var(--weidler-weiss);
-	transform: scale(1.1);
+	transform: scale(1.01);
 }
 
 
@@ -365,26 +438,31 @@ input[type="checkbox"] {
     }
     
     h1 {
-        margin-top: 50px;
-        font-size: 15vw;
+		position: fixed;
+        font-size: 10vw;
+		background-color: var(--background);
+		z-index: 1;
     }
+	
+	
 }
     </style>
-	<!-- online version of favicon
-	<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAc/8AAAAAAABaxwAAX9QA////AABl4AAAbPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEQAAAAAAAAEEUAAAAACIkERQiIgACIkEREUIiIDM0FEQRQzMzMzNDM0EUMzNVVVVVVBRVVVVVVVVVQUVVZmZmZmZkFGZmZmZmZmZGZgAAAAAAAAAAEAAAAAAAAAGAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAQAA" rel="icon" type="image/x-icon">
-	--!>
 	
 	<link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAACJSURBVDhPzZO7DYAwEEO9Ix0NFR0dG7AcCzAAI7DBIUcEnKB8gAZLLgL3XpBOAABshL0p2dfwKdkG2JMyen4kYNBMgQRrD6upwvq8SpCCnWDpYFomPhP2gng+EOhNPjnYCbiKub2qkJbROTfLNfp95iQpOBDcGn3+7X1RcEhycFlQ0R8IvvyRZHdNzW+5zWCXgAAAAABJRU5ErkJggg==" rel="icon" type="image/x-icon">
 	
-	<!--
-	<link href="ToDoCollApp.png" rel="icon" type="image/x-icon">
-	--!>
-	
-	
-	
 </head>
 <body>
+
+	<nav>
+		<ul>
+			<li id="show-team-button">Team</li>
+			<li>Overview</li>
+			<li>Home</li>
+		</ul>
+	</nav>
+
     <h1>To Do App</h1>
+	
     <div class="wrapper">
         <form>
             <textarea rows="3" placeholder="Neue Aufgabe hier eingeben" id="todo-input" autocomplete="off" autofocus></textarea>
@@ -393,8 +471,6 @@ input[type="checkbox"] {
         <ul id="todo-list">
             
         </ul>
-		<button id="show-team-button" class="modal-button">Team</button>
-
     </div>
 	
 	
@@ -426,14 +502,12 @@ input[type="checkbox"] {
 						<input type="color" id="color-picker">
 					</li>		
 				</ul>
-				
-				<button id="createMember" class="modal-button">Add</button>
+				<div id="button-wrapper">
+					<button id="createMember" class="modal-button">Add</button>
+					<button id="cancelCreateMember" class="modal-button">Cancel</button>
+				</div>
 			</form>
 	</dialog>
-	
-	<!--
-	
-	--!>
 	
     <script async="async" defer>
 
@@ -447,6 +521,7 @@ class TeamMember {
 
 	assignTask(todoObj) {
 		this.tasks.push(todoObj);
+		saveTeam(team);
 	}
 	
 	getToDoList() {
@@ -463,7 +538,8 @@ function addTodo() {
     if(todoText.length > 0) {
         const todoObject = {
             text: todoText,
-            completed: false
+            completed: false,
+			responsible: []
         };
         allTodos.push(todoObject);
         updateTodoList();
@@ -543,6 +619,7 @@ function createTodoItem(todo, todoIndex) {
 		let index = parseInt(e.target.closest("button").getAttribute("id").substr(12));
 		console.log(`Index: ${index}`);
         assignToTeamMember(index);
+		todoInput.focus();
     }, true);
 
     const checkbox = todoLI.querySelector("input");
@@ -580,7 +657,6 @@ function deleteTodoItem(todoIndex) {
     allTodos = allTodos.filter((_, i) => i !== todoIndex);
     saveTodos();
     updateTodoList();
-    /*alert(`ToDo No. ${todoIndex} was deleted.`);*/
 }
 
 function editTodoItem(todoIndex) {
@@ -591,6 +667,7 @@ function editTodoItem(todoIndex) {
 	const toDo = allTodos[todoIndex];
 	todoInput.value = toDo.text;
 	todoInput.focus();
+	window.scrollTo(0,0);
 	
 	indexPointer = todoIndex;
 }
@@ -606,8 +683,16 @@ function getTodos() {
 }
 
 function getTeamMembers() {
-	const team = localStorage.getItem("team") || "[]";
-	return JSON.parse(team);
+	const teamString = localStorage.getItem("team") || "[]";
+	const teamObj = JSON.parse(teamString);
+	const teamClass = [];
+	
+	teamObj.forEach(member => {
+		const teamMember = new TeamMember(member.name, member.tasks, member.color);
+		teamClass.push(teamMember);
+	});
+	
+	return teamClass;
 }
 
 function saveTeam(team) {
@@ -621,10 +706,20 @@ function addTeamMember(name, color) {
 	saveTeam(team);
 }
 
+function sortTeam(team) {
+	return team.sort((member1, member2) => {
+		if (member1.name > member2.name) {
+			return 1;
+		} else {
+			return -1;
+		}
+	});
+}
+
 function createTeamOverview(team) {
 	
 	// get array of current team members, sorted by name - FOR NOW: unsorted
-	let sortedTeam = team; 	// team.sort((a,b) => a.name - b.name);
+	let sortedTeam = sortTeam(team);
 	
 	// create reference to team overview dialog + to ul element
 	const teamOverview = document.getElementById("team-overview");
@@ -633,8 +728,14 @@ function createTeamOverview(team) {
 	// create HTML for each team member's li element and add to
 	// the innerHTML of the ul element
 	let teamListHTML = "";	
-	team.forEach(member => {
-		teamListHTML += `<li>${member.name}</li>`;
+	sortedTeam.forEach((member, index) => {
+		teamListHTML += `<li data-index="${index}">
+							${member.name} 
+							<button class="delete-button">
+                    <svg fill="var(--secondary-color)" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+							</button>
+						</li>`;
+		console.log(`${member.name} has the index ${index}`);
 	});
 	list.innerHTML = teamListHTML;	
 	
@@ -643,20 +744,69 @@ function createTeamOverview(team) {
 }
 
 function removeTeamMember(name) {
-	// remove the TeamMember object with name == name from the team Array
 	
-	// check if TeamMember has any active assignments + if yes, show warning
-	// remove TeamMember from assignments in allTodos 
+	// determine target team member object:
+	const lookupByName = team.filter(member => member.name === name);
+	const targetMember = lookupByName[0];
+	
+	// check if target member has any active assignments + if yes, show warning and ask for confirmation:
+	if (targetMember.tasks.length > 0) {
+		alert(`Warning: Team Member has unfinished asssignments pending!`);
+	} else {
+		// remove the TeamMember object with name == name from the team Array
+		console.log(`Removing member ${targetMember.name} from team.`);
+		// remove TeamMember from assignments in allTodos
+		console.log(`Removing member ${targetMember.name} from all assignments.`);
+	}
+	
+
+	saveTeam(team);
 }
 
-//TESTED OK
-function assignToTeamMember(member, todoIndex) {
+// TO BE REVISED
+function chooseTeamMember(team) {
+	//add event listeners for each team member to be clicked on and save the reference
+	//to the corresponding object in the member variable;
+	let member;
+	
+	let memberLIs = teamOverview.querySelectorAll("li");
+	memberLIs.forEach(li => {
+		console.log(li.innerText);
+		li.addEventListener("click", function(e) {
+			let name = e.target.innerText;
+			//console.log(`${name} selected.`);
+			
+			members = team.filter((member) => member.name === name);
+			console.log(member);
+			teamOverview.close();
+			return members[0];
+		});
+	teamOverview.showModal();
+	});
+	
+	//return members[0];
+}
+
+
+//TO BE REVISED
+function assignToTeamMember(todoIndex) {
+	let member = chooseTeamMember(team);
+	console.log(member[0]);
+	
+	/*
 	if (member == null || allTodos[todoIndex] == null) {
-		alert("Error: Team Member or ToDo not existing.");
+		alert(`Error: Team Member or ToDo not existing.`);
 		return;
 	}
-	member.assignToDo(allTodos[todoIndex]);
-	alert(`Assigned Item ${todoIndex} to team member ${member.name}.`);
+	*/
+	
+	if (allTodos[todoIndex] == null) {
+		alert(`Error: ToDo with index ${todoIndex} not existing.`);
+		return;
+	}
+	
+	//member.assignTask(allTodos[todoIndex]);
+	//alert(`Assigned Item ${todoIndex} to team member ${member.name}.`);
 }
 
 
@@ -671,16 +821,18 @@ const addMemberButton = document.getElementById('add-member-button');
 const addMemberDialog = document.getElementById('add-member');
 const createMemberButton = document.getElementById('createMember');
 
-
-let team = getTeamMembers();
-let teamOverview = createTeamOverview(team); //document.getElementById("team-overview");
-
 let mode = "add";
 let indexPointer;
+
+let team = getTeamMembers();
+let teamOverview = createTeamOverview(team);
 
 let allTodos = getTodos();
 updateTodoList();
 
+todoInput.addEventListener("focus", e => {
+	window.scrollTo(0,0);
+});
 
 todoForm.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -698,6 +850,7 @@ todoForm.addEventListener('submit', function(e) {
 teamButton.addEventListener("click", (e) => {
 	e.preventDefault();
 	teamOverview.showModal();
+	addMemberButton.focus();
 	
 });
 
